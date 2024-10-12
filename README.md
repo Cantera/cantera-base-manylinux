@@ -1,4 +1,4 @@
-'manylinux' Docker images are used to build Python extension modules compatible with many popular Linux distributions. This repository builds several dependencies on top of the standard manylinux images, for using in building Cantera.
+'manylinux' Docker images are used to build Python extension modules compatible with many popular Linux distributions. This repository builds several dependencies on top of the standard manylinux images, for use in building Cantera.
 
 Images are published on GitHub container registry:
 
