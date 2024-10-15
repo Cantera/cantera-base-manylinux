@@ -41,7 +41,7 @@ jobs:
       with:
         platforms: ${{ matrix.plat }}
         push: ${{ github.event_name != 'pull_request' }}
-        tags: ghcr.io/cantera/manylinux_2_28-cantera-base
+        tags: ghcr.io/cantera/cantera-base-manylinux_2_28-${{ matrix.arch }}
         build-args: |
           TARGET_ARCH=${{ matrix.arch }}
         target: builder
