@@ -19,22 +19,9 @@ ExternalProject_Add(
     DOWNLOAD_DIR ${DOWNLOAD_DIR}
 )
 
-set(LIBAEC_VERSION 1.1.3)
-set(LIBAEC_PATCHFILE)
-ExternalProject_Add(
-    libaec
-    URL https://github.com/MathisRosenhauer/libaec/releases/download/v${LIBAEC_VERSION}/libaec-${LIBAEC_VERSION}.tar.gz
-    URL_HASH SHA256=bd8bea8b69ca602796b2daf17b0a7de019ce3c3bd0ad56fa9ef4a631a4088058
-    PATCH_COMMAND patch -p0 < ${LIBAEC_PATCHFILE}
-    CMAKE_GENERATOR Ninja
-    CMAKE_CACHE_ARGS
-        -DCMAKE_BUILD_TYPE:STRING=Release
-        -DCMAKE_INSTALL_LIBDIR:STRING=lib
-        -DBUILD_TESTING:BOOL=OFF
-    DOWNLOAD_DIR ${DOWNLOAD_DIR}
-)
-
 set(LIBHDF5_VERSION 1.14.5)
+set(ZLIB_VERSION 1.3)
+set(LIBAEC_VERSION 1.1.3)
 ExternalProject_Add(
     libhdf5
     URL https://github.com/HDFGroup/hdf5/releases/download/hdf5_${LIBHDF5_VERSION}/hdf5-${LIBHDF5_VERSION}.tar.gz
@@ -45,11 +32,19 @@ ExternalProject_Add(
         -DCMAKE_INSTALL_PREFIX:STRING=/usr/local
         -DHDF5_ENABLE_Z_LIB_SUPPORT:BOOL=ON
         -DHDF5_ENABLE_SZIP_SUPPORT:BOOL=ON
-        -DHDF5_USE_LIBAEC_STATIC:BOOL=ON
         -DHDF5_BUILD_EXAMPLES:BOOL=OFF
         -DHDF5_BUILD_TOOLS:BOOL=OFF
         -DBUILD_TESTING:BOOL=OFF
-    DEPENDS libaec
+        -DHDF5_ALLOW_EXTERNAL_SUPPORT:STRING=TGZ
+        -DZLIB_PACKAGE_NAME:STRING=zlib
+        -DZLIB_TGZ_NAME:STRING=zlib-${ZLIB_VERSION}.tar.gz
+        -DZLIB_TGZ_ORIGPATH:STRING=https://github.com/madler/zlib/releases/download/v${ZLIB_VERSION}
+        -DZLIB_USE_LOCALCONTENT:BOOL=OFF
+        -DLIBAEC_PACKAGE_NAME:STRING=libaec
+        -DLIBAEC_TGZ_NAME:STRING=libaec-${LIBAEC_VERSION}.tar.gz
+        -DLIBAEC_TGZ_ORIGPATH:STRING=https://github.com/MathisRosenhauer/libaec/releases/download/v${LIBAEC_VERSION}
+        -DLIBAEC_USE_LOCALCONTENT:BOOL=OFF
+        -DHDF_PACKAGE_NAMESPACE:STRING=ct
     DOWNLOAD_DIR ${DOWNLOAD_DIR}
 )
 
