@@ -6,11 +6,11 @@ include(ExternalProject)
 
 set(DOWNLOAD_DIR "/cache")
 
-set(BOOST_VERSION 1.85.0)
+set(BOOST_VERSION 1.86.0)
 ExternalProject_Add(
     boost
     URL https://github.com/boostorg/boost/releases/download/boost-${BOOST_VERSION}/boost-${BOOST_VERSION}-cmake.tar.xz
-    URL_HASH SHA256=0a9cc56ceae46986f5f4d43fe0311d90cf6d2fa9028258a95cab49ffdacf92ad
+    URL_HASH SHA256=2c5ec5edcdff47ff55e27ed9560b0a0b94b07bd07ed9928b476150e16b0efc57
     CMAKE_GENERATOR Ninja
     CMAKE_CACHE_ARGS
         -DCMAKE_BUILD_TYPE:STRING=Release
@@ -19,27 +19,13 @@ ExternalProject_Add(
     DOWNLOAD_DIR ${DOWNLOAD_DIR}
 )
 
-set(LIBAEC_VERSION 1.0.6)
-set(LIBAEC_PATCHFILE)
-ExternalProject_Add(
-    libaec
-    URL https://gitlab.dkrz.de/k202009/libaec/uploads/45b10e42123edd26ab7b3ad92bcf7be2/libaec-${LIBAEC_VERSION}.tar.gz
-    URL_HASH SHA256=032961877231113bb094ef224085e6d66fd670f85a3e17f53d0f131abf24f2fd
-    PATCH_COMMAND patch -p0 < ${LIBAEC_PATCHFILE}
-    CMAKE_GENERATOR Ninja
-    CMAKE_CACHE_ARGS
-        -DCMAKE_BUILD_TYPE:STRING=Release
-        -DCMAKE_INSTALL_LIBDIR:STRING=lib
-        -DBUILD_TESTING:BOOL=OFF
-    DOWNLOAD_DIR ${DOWNLOAD_DIR}
-)
-
-set(LIBHDF5_VERSION 1.14.2)
-set(LIBHDF5_SHORT_VERSION 1.14)
+set(LIBHDF5_VERSION 1.14.5)
+set(ZLIB_VERSION 1.3)
+set(LIBAEC_VERSION 1.1.3)
 ExternalProject_Add(
     libhdf5
-    URL https://www.hdfgroup.org/ftp/HDF5/releases/hdf5-${LIBHDF5_SHORT_VERSION}/hdf5-${LIBHDF5_VERSION}/src/hdf5-${LIBHDF5_VERSION}.tar.gz
-    URL_HASH SHA256=1c342e634008284a8c2794c8e7608e2eaf26d01d445fb3dfd7f33cb2fb51ac53
+    URL https://github.com/HDFGroup/hdf5/releases/download/hdf5_${LIBHDF5_VERSION}/hdf5-${LIBHDF5_VERSION}.tar.gz
+    URL_HASH SHA256=ec2e13c52e60f9a01491bb3158cb3778c985697131fc6a342262d32a26e58e44
     CMAKE_GENERATOR Ninja
     CMAKE_CACHE_ARGS
         -DCMAKE_BUILD_TYPE:STRING=Release
@@ -47,8 +33,18 @@ ExternalProject_Add(
         -DHDF5_ENABLE_Z_LIB_SUPPORT:BOOL=ON
         -DHDF5_ENABLE_SZIP_SUPPORT:BOOL=ON
         -DHDF5_BUILD_EXAMPLES:BOOL=OFF
+        -DHDF5_BUILD_TOOLS:BOOL=OFF
         -DBUILD_TESTING:BOOL=OFF
-    DEPENDS libaec
+        -DHDF5_ALLOW_EXTERNAL_SUPPORT:STRING=TGZ
+        -DZLIB_PACKAGE_NAME:STRING=zlib
+        -DZLIB_TGZ_NAME:STRING=zlib-${ZLIB_VERSION}.tar.gz
+        -DZLIB_TGZ_ORIGPATH:STRING=https://github.com/madler/zlib/releases/download/v${ZLIB_VERSION}
+        -DZLIB_USE_LOCALCONTENT:BOOL=OFF
+        -DLIBAEC_PACKAGE_NAME:STRING=libaec
+        -DLIBAEC_TGZ_NAME:STRING=libaec-${LIBAEC_VERSION}.tar.gz
+        -DLIBAEC_TGZ_ORIGPATH:STRING=https://github.com/MathisRosenhauer/libaec/releases/download/v${LIBAEC_VERSION}
+        -DLIBAEC_USE_LOCALCONTENT:BOOL=OFF
+        -DHDF_PACKAGE_NAMESPACE:STRING=ct
     DOWNLOAD_DIR ${DOWNLOAD_DIR}
 )
 
@@ -72,7 +68,7 @@ ExternalProject_Add(
     URL_HASH SHA256=fbe74bbdcee21d656715688706da3c8becfd946d92cd44705cc6098bb23b3a16
     CMAKE_GENERATOR Ninja
     CMAKE_CACHE_ARGS
-        -DCMAKE_BUILD_TYPE:STRING=release
+        -DCMAKE_BUILD_TYPE:STRING=Release
         -DCMAKE_INSTALL_LIBDIR:STRING=lib
         -DYAML_CPP_DISABLE_UNINSTALL:BOOL=OFF
         -DYAML_CPP_FORMAT_SOURCE:BOOL=OFF
@@ -93,6 +89,8 @@ ExternalProject_Add(
         -DBUILD_SHARED_LIBS:BOOL=OFF
         -DEXAMPLES_ENABLE_C:BOOL=OFF
         -DEXAMPLES_INSTALL:BOOL=OFF
+        -DENABLE_LAPACK:BOOL=ON
+        -DBLA_VENDOR:STRING=OpenBLAS
     DOWNLOAD_DIR ${DOWNLOAD_DIR}
 )
 
@@ -111,11 +109,11 @@ ExternalProject_Add(
     DOWNLOAD_DIR ${DOWNLOAD_DIR}
 )
 
-set(HIGHFIVE_VERSION 2.9.0)
+set(HIGHFIVE_VERSION 2.10.0)
 ExternalProject_Add(
     highfive
     URL https://github.com/BlueBrain/HighFive/archive/refs/tags/v${HIGHFIVE_VERSION}.tar.gz
-    URL_HASH SHA256=6301def8ceb9f4d7a595988612db288b448a3c0546f6c83417dab38c64994d7e
+    URL_HASH SHA256=c29e8e1520e7298fabb26545f804e35bb3af257005c1c2df62e39986458d7c38
     CMAKE_GENERATOR Ninja
     CMAKE_CACHE_ARGS
         -DCMAKE_BUILD_TYPE:STRING=Release
