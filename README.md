@@ -2,5 +2,5 @@
 
 Images are published on the GitHub container registry:
 
-- [cantera-base-manylinux_2_28-x86_64](https://github.com/orgs/cantera/packages/container/package/manylinux_2_28_x86_64-hdf5-boost).
-- [cantera-base-manylinux_2_28-aarch64](https://github.com/orgs/cantera/packages/container/package/manylinux_2_28_aarch64-hdf5-boost).
+- [cantera-base-manylinux_2_28-x86_64](https://github.com/orgs/Cantera/packages/container/package/cantera-base-manylinux_2_28-x86_64).
+- [cantera-base-manylinux_2_28-aarch64](https://github.com/orgs/Cantera/packages/container/package/cantera-base-manylinux_2_28-aarch64).
