@@ -2,5 +2,5 @@
 
 Images are published on the GitHub container registry:
 
-- [cantera-base-manylinux_2_28-x86_64](https://github.com/orgs/Cantera/packages/container/package/cantera-base-manylinux_2_28-x86_64).
-- [cantera-base-manylinux_2_28-aarch64](https://github.com/orgs/Cantera/packages/container/package/cantera-base-manylinux_2_28-aarch64).
+- [cantera-base-manylinux_2_28-x86_64](https://github.com/orgs/Cantera/packages/container/package/cantera-base-manylinux_2_28-x86_64)
+- [cantera-base-manylinux_2_28-aarch64](https://github.com/orgs/Cantera/packages/container/package/cantera-base-manylinux_2_28-aarch64)
