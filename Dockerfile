@@ -23,18 +23,3 @@ RUN --mount=type=cache,target=/cache \
     && ninja \
     && popd \
     && rm -rf build
-
-# FROM builder AS tester
-
-# RUN yum install -y python3.12-pip \
-#     && python3.12 -m pip install --root-user-action=ignore build auditwheel
-
-# COPY cantera-3.1.0a4.tar.gz /project/
-
-# RUN --mount=type=cache,target=/root/.cache \
-#     pushd project \
-#     && tar --strip-components=1 -zxf cantera-*.tar.gz \
-#     && rm -f cantera-*.tar.gz \
-#     && python3.12 -m build --wheel . \
-#     && pushd dist \
-#     && auditwheel repair -w . cantera*.whl
