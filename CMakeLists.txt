@@ -67,6 +67,8 @@ ExternalProject_Add(
     URL https://github.com/jbeder/yaml-cpp/archive/refs/tags/${YAML_CPP_VERSION}.tar.gz
     URL_HASH SHA256=fbe74bbdcee21d656715688706da3c8becfd946d92cd44705cc6098bb23b3a16
     CMAKE_GENERATOR Ninja
+    CMAKE_ARGS
+        -DCMAKE_POLICY_VERSION_MINIMUM=3.5
     CMAKE_CACHE_ARGS
         -DCMAKE_BUILD_TYPE:STRING=Release
         -DCMAKE_INSTALL_LIBDIR:STRING=lib
