@@ -13,7 +13,7 @@ concurrency:
 jobs:
   build:
     name: Build image for ${{ matrix.arch }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04${{ matrix.arch == 'aarch64' && '-arm64' || '' }}
     strategy:
       matrix:
         include:
@@ -41,11 +41,6 @@ jobs:
         registry: ghcr.io
         username: ${{ github.repository_owner }}
         password: ${{ secrets.GITHUB_TOKEN }}
-    - name: Set up QEMU
-      if: matrix.arch == 'aarch64'
-      uses: docker/setup-qemu-action@v3
-      with:
-        platforms: arm64
     - name: Build and push
       uses: docker/build-push-action@v6
       with:
