@@ -119,9 +119,14 @@ ExternalProject_Add(
 set(HIGHFIVE_VERSION 2.10.0)
 ExternalProject_Add(
     highfive
+    # TODO: This library is now maintained separately from Blue Brain, at
+    # https://github.com/highfive-devs/highfive. After version 3.0 of HighFive is
+    # released, we should switch to that repository.
     URL https://github.com/BlueBrain/HighFive/archive/refs/tags/v${HIGHFIVE_VERSION}.tar.gz
     URL_HASH SHA256=c29e8e1520e7298fabb26545f804e35bb3af257005c1c2df62e39986458d7c38
     CMAKE_GENERATOR Ninja
+    CMAKE_ARGS
+        -DCMAKE_POLICY_VERSION_MINIMUM=3.5
     CMAKE_CACHE_ARGS
         -DCMAKE_BUILD_TYPE:STRING=Release
         -DHIGHFIVE_UNIT_TESTS:BOOL=OFF
