@@ -15,10 +15,12 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+permissions: {}
+
 jobs:
   build:
     name: Build image for ${{ matrix.arch }}
-    runs-on: ubuntu-24.04${{ matrix.arch == 'aarch64' && '-arm64' || '' }}
+    runs-on: ubuntu-24.04${{ matrix.arch == 'aarch64' && '-arm' || '' }}
     strategy:
       matrix:
         include:
@@ -27,7 +29,10 @@ jobs:
           - arch: aarch64
             plat: linux/arm64
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout the repo
+      uses: actions/checkout@v4
+      with:
+        persist-credentials: false
     - name: Docker meta
       id: meta
       uses: docker/metadata-action@v5
@@ -41,11 +46,14 @@ jobs:
     - name: Build args
       id: build-args
       run: |
-        output="TARGET_ARCH=${{ matrix.arch }}"
-        if [ -n "$MANYLINUX_TAG_INPUT" ]; then
-          output+="\nMANYLINUX_TAG=$MANYLINUX_TAG_INPUT"
-        fi
-        echo "BUILD_ARGS=$output" >> $GITHUB_OUTPUT
+        {
+          echo BUILD_ARGS<<EOF
+          TARGET_ARCH=${{ matrix.arch }}
+          if [ -n "$MANYLINUX_TAG_INPUT" ]; then
+            echo MANYLINUX_TAG=$MANYLINUX_TAG_INPUT
+          fi
+          EOF
+        } >> $GITHUB_OUTPUT
       env:
         MANYLINUX_TAG_INPUT: ${{ github.event.inputs.manylinux_tag }}
     - name: Set up Docker Buildx
@@ -64,6 +72,5 @@ jobs:
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
         build-args: ${{ steps.build-args.outputs.BUILD_ARGS }}
-        target: builder
         cache-from: type=gha
         cache-to: type=gha,mode=max
