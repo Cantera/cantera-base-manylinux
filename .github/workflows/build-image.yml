@@ -47,12 +47,12 @@ jobs:
       id: build-args
       run: |
         {
-          echo BUILD_ARGS<<EOF
-          TARGET_ARCH=${{ matrix.arch }}
+          echo 'BUILD_ARGS<<EOF'
+          echo TARGET_ARCH=${{ matrix.arch }}
           if [ -n "$MANYLINUX_TAG_INPUT" ]; then
             echo MANYLINUX_TAG=$MANYLINUX_TAG_INPUT
           fi
-          EOF
+          echo EOF
         } >> $GITHUB_OUTPUT
       env:
         MANYLINUX_TAG_INPUT: ${{ github.event.inputs.manylinux_tag }}
