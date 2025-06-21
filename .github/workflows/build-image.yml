@@ -9,7 +9,7 @@ on:
       manylinux_tag:
         description: 'Manylinux tag to build'
         required: true
-        default: '2025-03-30-1e65560'
+        default: "2025-06-19-87542c8"
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -21,6 +21,9 @@ jobs:
   build:
     name: Build image for ${{ matrix.arch }}
     runs-on: ubuntu-24.04${{ matrix.arch == 'aarch64' && '-arm' || '' }}
+    permissions:
+      packages: write
+      contents: read
     strategy:
       matrix:
         include:
@@ -72,5 +75,5 @@ jobs:
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
         build-args: ${{ steps.build-args.outputs.BUILD_ARGS }}
-        cache-from: type=gha
-        cache-to: type=gha,mode=max
+        cache-from: ${{ github.event_name != 'pull_request' && 'type=gha' || '' }}
+        cache-to: ${{ github.event_name != 'pull_request' && 'type=gha,mode=max' || '' }}
