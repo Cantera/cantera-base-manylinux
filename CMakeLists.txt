@@ -6,11 +6,11 @@ include(ExternalProject)
 
 set(DOWNLOAD_DIR "/cache")
 
-set(BOOST_VERSION 1.86.0)
+set(BOOST_VERSION 1.88.0)
 ExternalProject_Add(
     boost
     URL https://github.com/boostorg/boost/releases/download/boost-${BOOST_VERSION}/boost-${BOOST_VERSION}-cmake.tar.xz
-    URL_HASH SHA256=2c5ec5edcdff47ff55e27ed9560b0a0b94b07bd07ed9928b476150e16b0efc57
+    URL_HASH SHA256=f48b48390380cfb94a629872346e3a81370dc498896f16019ade727ab72eb1ec
     CMAKE_GENERATOR Ninja
     CMAKE_CACHE_ARGS
         -DCMAKE_BUILD_TYPE:STRING=Release
@@ -19,13 +19,13 @@ ExternalProject_Add(
     DOWNLOAD_DIR ${DOWNLOAD_DIR}
 )
 
-set(LIBHDF5_VERSION 1.14.5)
+set(LIBHDF5_VERSION 1.14.6)
 set(ZLIB_VERSION 1.3.1)
-set(LIBAEC_VERSION 1.1.3)
+set(LIBAEC_VERSION 1.1.4)
 ExternalProject_Add(
     libhdf5
     URL https://github.com/HDFGroup/hdf5/releases/download/hdf5_${LIBHDF5_VERSION}/hdf5-${LIBHDF5_VERSION}.tar.gz
-    URL_HASH SHA256=ec2e13c52e60f9a01491bb3158cb3778c985697131fc6a342262d32a26e58e44
+    URL_HASH SHA256=e4defbac30f50d64e1556374aa49e574417c9e72c6b1de7a4ff88c4b1bea6e9b
     CMAKE_GENERATOR Ninja
     CMAKE_CACHE_ARGS
         -DCMAKE_BUILD_TYPE:STRING=Release
@@ -78,11 +78,11 @@ ExternalProject_Add(
     DOWNLOAD_DIR ${DOWNLOAD_DIR}
 )
 
-set(SUNDIALS_VERSION 7.1.1)
+set(SUNDIALS_VERSION 7.4.0)
 ExternalProject_Add(
     sundials
     URL https://github.com/LLNL/sundials/releases/download/v${SUNDIALS_VERSION}/sundials-${SUNDIALS_VERSION}.tar.gz
-    URL_HASH SHA256=ea7d6edfb52448ddfdc1ec48f89a721fe6c0a259c10f8ef56f60fcded87a94bb
+    URL_HASH SHA256=679ddacdd77610110e613164e8297d6d0cd35bae8e9c3afc8e8ff6f99a1c2a7b
     CMAKE_GENERATOR Ninja
     CMAKE_CACHE_ARGS
         -DCMAKE_BUILD_TYPE:STRING=Release
@@ -100,11 +100,11 @@ ExternalProject_Add(
     DOWNLOAD_DIR ${DOWNLOAD_DIR}
 )
 
-set(FMT_VERSION 11.0.2)
+set(FMT_VERSION 11.2.0)
 ExternalProject_Add(
     fmt
     URL https://github.com/fmtlib/fmt/releases/download/${FMT_VERSION}/fmt-${FMT_VERSION}.zip
-    URL_HASH SHA256=40fc58bebcf38c759e11a7bd8fdc163507d2423ef5058bba7f26280c5b9c5465
+    URL_HASH SHA256=203eb4e8aa0d746c62d8f903df58e0419e3751591bb53ff971096eaa0ebd4ec3
     CMAKE_GENERATOR Ninja
     CMAKE_CACHE_ARGS
         -DCMAKE_BUILD_TYPE:STRING=Release
@@ -115,14 +115,12 @@ ExternalProject_Add(
     DOWNLOAD_DIR ${DOWNLOAD_DIR}
 )
 
-set(HIGHFIVE_VERSION 2.10.0)
+# The dot before the 3 is a typo in the tag on the GitHub repo
+set(HIGHFIVE_VERSION .3.1.1)
 ExternalProject_Add(
     highfive
-    # TODO: This library is now maintained separately from Blue Brain, at
-    # https://github.com/highfive-devs/highfive. After version 3.0 of HighFive is
-    # released, we should switch to that repository.
-    URL https://github.com/BlueBrain/HighFive/archive/refs/tags/v${HIGHFIVE_VERSION}.tar.gz
-    URL_HASH SHA256=c29e8e1520e7298fabb26545f804e35bb3af257005c1c2df62e39986458d7c38
+    URL https://github.com/highfive-devs/highfive/archive/refs/tags/v${HIGHFIVE_VERSION}.tar.gz
+    URL_HASH SHA256=c0bc76b01868a133bf4550a07321923c5582fe3967edc102864b082e40799914
     CMAKE_GENERATOR Ninja
     CMAKE_ARGS
         -DCMAKE_POLICY_VERSION_MINIMUM=3.5
