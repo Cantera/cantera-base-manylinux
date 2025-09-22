@@ -17,7 +17,7 @@ on:
       manylinux_tag:
         description: 'Manylinux tag to build'
         required: true
-        default: "2025-06-19-87542c8"
+        default: "2025.09.19-1"
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
