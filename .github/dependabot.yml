@@ -4,4 +4,8 @@ updates:
     directory: "/"
     schedule:
       # Check for updates to GitHub Actions every week
-      interval: "weekly"
+      interval: "monthly"
+    groups:
+      all:
+        patterns: ["*"]
+        update-types: ["major", "minor", "patch"]
