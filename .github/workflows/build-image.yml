@@ -41,12 +41,12 @@ jobs:
             plat: linux/arm64
     steps:
     - name: Checkout the repo
-      uses: actions/checkout@v5
+      uses: actions/checkout@v6
       with:
         persist-credentials: false
     - name: Docker meta
       id: meta
-      uses: docker/metadata-action@c1e51972afc2121e065aed6d45c65596fe445f3f # v5.8.0
+      uses: docker/metadata-action@c299e40c65443455700f0fdfc63efafe5b349051 # v5.10.0
       with:
         images: |
           ghcr.io/cantera/cantera-base-manylinux_2_28-${{ matrix.arch }}
