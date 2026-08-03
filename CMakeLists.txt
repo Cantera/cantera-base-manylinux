@@ -48,11 +48,11 @@ ExternalProject_Add(
     DOWNLOAD_DIR ${DOWNLOAD_DIR}
 )
 
-set(EIGEN_VERSION 3.4.0)
+set(EIGEN_VERSION 5.0.1)
 ExternalProject_Add(
     eigen
     URL https://gitlab.com/libeigen/eigen/-/archive/${EIGEN_VERSION}/eigen-${EIGEN_VERSION}.tar.bz2
-    URL_HASH SHA256=b4c198460eba6f28d34894e3a5710998818515104d6e74e5cc331ce31e46e626
+    URL_HASH SHA256=e4de6b08f33fd8b8985d2f204381408c660bffa6170ac65b68ae1bd3cd575c0a
     CMAKE_GENERATOR Ninja
     CMAKE_CACHE_ARGS
         -DCMAKE_BUILD_TYPE:STRING=Release
@@ -78,11 +78,11 @@ ExternalProject_Add(
     DOWNLOAD_DIR ${DOWNLOAD_DIR}
 )
 
-set(SUNDIALS_VERSION 7.4.0)
+set(SUNDIALS_VERSION 7.8.0)
 ExternalProject_Add(
     sundials
     URL https://github.com/LLNL/sundials/releases/download/v${SUNDIALS_VERSION}/sundials-${SUNDIALS_VERSION}.tar.gz
-    URL_HASH SHA256=679ddacdd77610110e613164e8297d6d0cd35bae8e9c3afc8e8ff6f99a1c2a7b
+    URL_HASH SHA256=69ec92653e998e4841b59d363b3abf21299251991390f52917402737164ca574
     CMAKE_GENERATOR Ninja
     CMAKE_CACHE_ARGS
         -DCMAKE_BUILD_TYPE:STRING=Release
@@ -100,11 +100,11 @@ ExternalProject_Add(
     DOWNLOAD_DIR ${DOWNLOAD_DIR}
 )
 
-set(FMT_VERSION 11.2.0)
+set(FMT_VERSION 12.2.0)
 ExternalProject_Add(
     fmt
     URL https://github.com/fmtlib/fmt/releases/download/${FMT_VERSION}/fmt-${FMT_VERSION}.zip
-    URL_HASH SHA256=203eb4e8aa0d746c62d8f903df58e0419e3751591bb53ff971096eaa0ebd4ec3
+    URL_HASH SHA256=a2f4a8d51178f954e4c339007f77edd76ba0cb2e36f87a48e5a5403d9be5878f
     CMAKE_GENERATOR Ninja
     CMAKE_CACHE_ARGS
         -DCMAKE_BUILD_TYPE:STRING=Release
@@ -115,12 +115,11 @@ ExternalProject_Add(
     DOWNLOAD_DIR ${DOWNLOAD_DIR}
 )
 
-# The dot before the 3 is a typo in the tag on the GitHub repo
-set(HIGHFIVE_VERSION .3.1.1)
+set(HIGHFIVE_VERSION 3.3.0)
 ExternalProject_Add(
     highfive
     URL https://github.com/highfive-devs/highfive/archive/refs/tags/v${HIGHFIVE_VERSION}.tar.gz
-    URL_HASH SHA256=c0bc76b01868a133bf4550a07321923c5582fe3967edc102864b082e40799914
+    URL_HASH SHA256=325cfbcf0c0296a6dd26f3b088801b7ebb8d6f109c0565c11d2d8c4af3253bff
     CMAKE_GENERATOR Ninja
     CMAKE_ARGS
         -DCMAKE_POLICY_VERSION_MINIMUM=3.5
