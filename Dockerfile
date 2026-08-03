@@ -2,10 +2,10 @@
 # from TARGETARCH which is defined by docker. The reason is because TARGETARCH=amd64
 # but we need TARGET_ARCH=x86_64
 ARG TARGET_ARCH=x86_64
-ARG MANYLINUX_TAG=2026.02.01-1
+ARG MANYLINUX_TAG=2026.07.25-1
 FROM quay.io/pypa/manylinux_2_28_${TARGET_ARCH}:${MANYLINUX_TAG} AS builder
 
-ARG NINJA_VERSION=1.12.1
+ARG NINJA_VERSION=1.13.1
 # Has to be repeated here so it's imported from the "top level" above the FROM
 ARG TARGET_ARCH
 
@@ -20,7 +20,7 @@ RUN --mount=type=cache,target=/cache \
     && yum install -y openblas-devel
 COPY CMakeLists.txt /build/
 RUN --mount=type=cache,target=/cache \
-    echo true \
+    cmake --version \
     && cmake -G Ninja -S . -B build \
     && pushd build \
     && ninja \
