@@ -61,11 +61,11 @@ ExternalProject_Add(
     DOWNLOAD_DIR ${DOWNLOAD_DIR}
 )
 
-set(YAML_CPP_VERSION 0.8.0)
+set(YAML_CPP_VERSION 0.9.0)
 ExternalProject_Add(
     yamlcpp
-    URL https://github.com/jbeder/yaml-cpp/archive/refs/tags/${YAML_CPP_VERSION}.tar.gz
-    URL_HASH SHA256=fbe74bbdcee21d656715688706da3c8becfd946d92cd44705cc6098bb23b3a16
+    URL https://github.com/jbeder/yaml-cpp/releases/download/yaml-cpp-${YAML_CPP_VERSION}/yaml-cpp-yaml-cpp-${YAML_CPP_VERSION}.tar.gz
+    URL_HASH SHA256=298593d9c440fd9034b8b193d96318b76d49bc97c6ceadb7b0836edf0b6d7539
     CMAKE_GENERATOR Ninja
     CMAKE_ARGS
         -DCMAKE_POLICY_VERSION_MINIMUM=3.5

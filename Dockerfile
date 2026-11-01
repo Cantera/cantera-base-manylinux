@@ -2,7 +2,7 @@
 # from TARGETARCH which is defined by docker. The reason is because TARGETARCH=amd64
 # but we need TARGET_ARCH=x86_64
 ARG TARGET_ARCH=x86_64
-ARG MANYLINUX_TAG=2026.07.25-1
+ARG MANYLINUX_TAG=2026.10.31-1
 FROM quay.io/pypa/manylinux_2_28_${TARGET_ARCH}:${MANYLINUX_TAG} AS builder
 
 ARG NINJA_VERSION=1.13.1
